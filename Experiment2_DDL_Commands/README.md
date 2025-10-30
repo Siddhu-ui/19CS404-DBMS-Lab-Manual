@@ -105,186 +105,200 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
-<img width="1193" height="354" alt="image" src="https://github.com/user-attachments/assets/8da958c2-a907-459c-b928-d41b7855b705" />
-
+Create a new table named item with the following specifications and constraints:
+    item_id as TEXT and as primary key.
+    item_desc as TEXT.
+    rate as INTEGER.
+    icom_id as TEXT with a length of 4.
+    icom_id is a foreign key referencing com_id in the company table.
+    The foreign key should set NULL on updates and deletes.
+    item_desc and rate should not accept NULL.
 
 ```sql
-CREATE TABLE Employees(
-    EmployeeID Integer PRIMARY KEY,
-    FirstName TEXT NOT NULL,
-    LastName TEXT NOT NULL,
-    Email TEXT UNIQUE,
-    Salary REAL CHECK (Salary > 0),
-    DepartmentID INTEGER,
-    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
+CREATE TABLE item(
+    item_id TEXT PRIMARY KEY,
+    item_desc TEXT NOT NULL,
+    rate INTEGER NOT NULL,
+    icom_id TEXT CHECK(LENGTH(icom_id)=4),
+    FOREIGN KEY (icom_id) REFERENCES company(com_id)
+    ON DELETE SET NULL 
+    ON UPDATE SET NULL
 );
 ```
 
 **Output:**
 
-<img width="1603" height="396" alt="image" src="https://github.com/user-attachments/assets/4d97faa9-0c57-4f6a-ad2b-229c524fa3b1" />
+![image](https://github.com/user-attachments/assets/2eebfa33-e414-40c2-9965-f774fbd762ca)
+
 
 
 **Question 2**
 ---
-<img width="1048" height="438" alt="image" src="https://github.com/user-attachments/assets/969d9392-fbf2-4a7f-af3c-4c2369c11d55" />
-
+Insert all products from Discontinued_products into Products.
+Table attributes are ProductID, ProductName, Price, Stock
 
 ```sql
-CREATE TABLE Events(
-EventID INTEGER,
-EventName TEXT,
-EventDate DATE
-);
+insert into Products(ProductID, ProductName, Price, Stock)
+SELECT * FROM Discontinued_products; 
 ```
 
 **Output:**
 
-<img width="1612" height="366" alt="image" src="https://github.com/user-attachments/assets/cf6d99f3-5f29-47e9-b410-7de0ac6d0501" />
+![image](https://github.com/user-attachments/assets/7edc5ec7-c274-4173-9d29-be2f37264084)
 
 
 **Question 3**
 ---
-<img width="797" height="352" alt="image" src="https://github.com/user-attachments/assets/064490b4-417b-4508-95fe-ea103e1dc7ca" />
+Create a table named Employees with the following constraints:
 
+EmployeeID should be the primary key.
+FirstName and LastName should be NOT NULL.
+Email should be unique.
+Salary should be greater than 0.
+DepartmentID should be a foreign key referencing the Departments table.
 
 ```sql
-INSERT INTO Customers (CustomerID, Name, Address)
-VALUES (304,'Peter Parker', 'Spider St');
+create table Employees(
+EmployeeID int primary key,
+FirstName text not null,
+LastName text not null,
+Salary int check(salary>0),
+Email text unique,
+DepartmentID int,
+foreign key (DepartmentID) references Departments(DepartmentID)
+);
 ```
 
 **Output:**
 
-<img width="1386" height="425" alt="image" src="https://github.com/user-attachments/assets/1e6c4a10-0338-4e6f-98bc-b9ab76d60286" />
+![image](https://github.com/user-attachments/assets/1adf1535-cc33-4e8c-bdb3-c13211382312)
 
 
 **Question 4**
 ---
-<img width="1008" height="345" alt="image" src="https://github.com/user-attachments/assets/33528e68-35db-4949-84f9-f17c1729db08" />
-
-
+Insert a student with RollNo 201, Name David Lee, Gender M, Subject Physics, and MARKS 92 into the Student_details table
 ```sql
-CREATE TABLE Invoices(
-InvoiceID INTEGER PRIMARY KEY,
-InvoiceDate DATE,
-DueDate DATE,
-Amount REAL CHECK (Amount > 0),
-CHECK (DueDate > InvoiceDate)
-);
+insert into Student_details(RollNo,Name,Gender,Subject,MARKS)values(201,'David Lee','M','Physics',92)
 ```
 
 **Output:**
 
-<img width="1600" height="351" alt="image" src="https://github.com/user-attachments/assets/03871872-aa8b-49b3-a21d-53d707ae35c9" />
-
+![image](https://github.com/user-attachments/assets/2e6a5949-c3e0-4840-a395-b7f35ba90b10)
 
 **Question 5**
 ---
-<img width="1066" height="612" alt="image" src="https://github.com/user-attachments/assets/697b6d8a-df17-461a-b505-bc64e4a7c6c1" />
 
+Create a table named Members with the following columns:
+
+MemberID as INTEGER
+MemberName as TEXT
+JoinDate as DATE
 
 ```sql
-ALTER TABLE Companies ADD COLUMN designation varchar(50);
-ALTER TABLE Companies ADD COLUMN net_salary number;
-ALTER TABLE Companies ADD COLUMN dob date;
+create table Members(
+MemberID INTEGER,
+MemberName TEXT,
+JoinDate DATE);
 ```
 
 **Output:**
 
-<img width="1848" height="472" alt="image" src="https://github.com/user-attachments/assets/35d9af50-892d-4ad4-ae74-3818de17067c" />
-
+![image](https://github.com/user-attachments/assets/b94e86a9-4b62-4e4a-b1fd-f93cf5b9d677)
 
 **Question 6**
 ---
-<img width="908" height="359" alt="image" src="https://github.com/user-attachments/assets/996d0d91-0cd8-42f2-8ec4-6a680081f70b" />
-
+Write an SQL query to change the name of the column id to employee_id in the table employee.
 
 ```sql
-INSERT INTO Customers (CustomerID, Name, Address, Email)
-SELECT CustomerID, Name, Address, Email
-FROM Old_customers;
+alter table employee  rename id to employee_id; 
 ```
 
 **Output:**
 
-<img width="1689" height="368" alt="image" src="https://github.com/user-attachments/assets/0ae8f4fd-9804-4c3a-940b-856edb1136a4" />
-
+![image](https://github.com/user-attachments/assets/f03e7c20-39ca-4084-9ce8-a64981818a5b)
 
 **Question 7**
 ---
-<img width="1513" height="390" alt="image" src="https://github.com/user-attachments/assets/b79686f2-4799-4fe4-b145-f31da66ca347" />
-
-
+Create a table named Attendance with the following constraints:
+AttendanceID as INTEGER should be the primary key.
+EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+AttendanceDate as DATE.
+Status as TEXT should be one of 'Present', 'Absent', 'Leave'.
 ```sql
-CREATE TABLE Products(
-ProductID INTEGER PRIMARY KEY,
-ProductName TEXT UNIQUE NOT NULL,
-Price REAL CHECK (Price > 0),
-StockQuantity INTEGER CHECK (StockQuantity >= 0)
+create table Attendance(
+    AttendanceID INTEGER PRIMARY KEY,
+    EmployeeID INTEGER,
+    AttendanceDate DATE,
+    Status TEXT ,
+    foreign key (EmployeeID) references  Employees(EmployeeID),
+    CHECK(Status IN ('Present','Absent','Leave'))
 );
 ```
 
 **Output:**
 
-<img width="1824" height="271" alt="image" src="https://github.com/user-attachments/assets/228e2470-f1d9-40ab-a26f-7aa052af6d86" />
-
+![image](https://github.com/user-attachments/assets/a78faf98-d2de-4a5b-b892-219f87d96a7f)
 
 **Question 8**
 ---
-<img width="868" height="498" alt="image" src="https://github.com/user-attachments/assets/9612b945-3729-4a78-a0ab-9d5db48274e5" />
+Insert the following products into the Products table:
 
-
+Name        Category     Price       Stock<br/>
+----------  -----------  ----------  ----------<br/>
+Smartphone  Electronics  800         150<br/>
+Headphones  Accessories  200         300<br/>
 ```sql
-INSERT INTO Customers (ID, NAME, AGE, ADDRESS, SALARY) VALUES
-(1, 'Ramesh', 32, 'Ahmedabad', 2000),
-(2, 'Khilan', 25, 'Delhi', 1500),
-(3, 'Kaushik',23, 'Kota', 2000);
+insert into Products(Name,Category,Price,Stock)values('Smartphone','Electronics',800,150),('Headphones','Accessories',200,300);
 ```
 
 **Output:**
 
-<img width="1758" height="419" alt="image" src="https://github.com/user-attachments/assets/98862823-75f6-4779-96f8-78af6be976f0" />
-
-
+![image](https://github.com/user-attachments/assets/be52dd8d-1198-46a3-a0c0-42a01ce48691)
 
 **Question 9**
 ---
-<img width="1597" height="315" alt="image" src="https://github.com/user-attachments/assets/87731bc1-d025-4e35-9ce4-4e780607bf93" />
 
+Write a SQL query to add birth_date attribute as timestamp (datatype) in the table customer 
+
+Sample table: customer
+
+ customer_id |   cust_name    |    city    | grade | salesman_id <br/>
+-------------+----------------+------------+-------+-------------<br/>
+        3002 | Nick Rimando   | New York   |   100 |        5001<br/>
+        3007 | Brad Davis     | New York   |   200 |        5001<br/>
+        3005 | Graham Zusi    | California |   200 |        5002<br/>
 
 ```sql
-ALTER TABLE Student_details
-ADD COLUMN email TEXT NOT NULL DEFAULT 'Invalid';
-
+alter table customer add birth_date timestamp;
 ```
 
 **Output:**
 
-<img width="1704" height="318" alt="image" src="https://github.com/user-attachments/assets/ce4698b0-e52c-49f8-8519-d51595d1ab56" />
-
+![image](https://github.com/user-attachments/assets/b17d1491-6ca4-4208-9db7-c4f7390468e3)
 
 **Question 10**
 ---
-<img width="1648" height="397" alt="image" src="https://github.com/user-attachments/assets/447413c7-52c8-45ec-9d19-81f1517a8e12" />
 
+Write a SQL query to Add a new column Country as text in the Student_details table.
+
+Sample table: Student_details
+
+ cid              name             type   notnull     dflt_value  pk <br/>
+---------------  ---------------  -----  ----------  ----------  ----------<br/>
+0                RollNo           int    0                       1<br/>
+1                Name             VARCH  1                       0<br/>
+2                Gender           TEXT   1                       0<br/>
+3                Subject          VARCH  0                       0<br/>
+4                MARKS            INT (  0                       0<br/>
 
 ```sql
-CREATE TABLE ProjectAssignments (
-    AssignmentID INTEGER PRIMARY KEY,
-    EmployeeID INTEGER,
-    ProjectID INTEGER,
-    AssignmentDate DATE NOT NULL,
-    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
-    FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID)
-);
-    
+
+alter table Student_details add Country TEXT;
 ```
 
 **Output:**
 
-<img width="1767" height="284" alt="image" src="https://github.com/user-attachments/assets/3ad8c535-6e8b-4d16-aef4-76c636b7659a" />
-
-
+![image](https://github.com/user-attachments/assets/d77662df-626a-4c27-90d9-4f8487ba882e)
 
 
 ## RESULT
